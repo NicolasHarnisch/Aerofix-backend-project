@@ -1,4 +1,4 @@
-# Sistema de Reserva de Poltronas 🎟️
+# Sistema de Reserva de Passagens Aéreas 🎟️
 
 Este projeto é uma aplicação C++ que simula um sistema de reserva de poltronas semelhante ao de um avião. Ele permite que os usuários escolham poltronas em diferentes classes (econômica e executiva), com funcionalidades como reserva em grupo, planos familiares e recomendações de assentos próximos.
 
