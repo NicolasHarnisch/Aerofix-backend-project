@@ -1,4 +1,4 @@
-# Sistema de Reservas de Poltronas Versão 1.1 🎟️
+#Sistema de Reserva de Passagens Aéreas / Versão 1.1 🎟️
 
 ## 📜 Funcionalidades que já existiam e foram melhoradas
 
