@@ -1,4 +1,4 @@
-# Sistema de Reserva de Passagens Aéreas 🎟️
+# Sistema de Reserva de Passagens Aéreas / Versão 1.0 🎟️
 ## 📜 Funcionalidades
 
 - **Visualização das Poltronas**: Exibe a disposição dos assentos disponíveis e ocupados.
