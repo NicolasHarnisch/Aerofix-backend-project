@@ -1,6 +1,21 @@
-# Plataforma de Reserva de Poltronas para Viagens Aéreas 🎟️
+<div align="center">
 
-Este projeto é uma aplicação C++ que simula um sistema de reserva de poltronas semelhante ao de um avião. Ele permite que os usuários escolham poltronas em diferentes classes (econômica e executiva), com funcionalidades como reserva em grupo, planos familiares e recomendações de assentos próximos.
+<br>
+
+# **Plataforma de Reserva de Poltronas para Viagens Aéreas 🎟️**
+
+</div>
+
+Este projeto é uma aplicação desenvolvida em C++ que simula um sistema de reserva de poltronas, oferecendo uma experiência imersiva e intuitiva.
+
+## Aqui está um GIF mostrando como o projeto funciona:
+
+#### Versão 1.0: Lançamento inicial com funcionalidades básicas.
+
+![https://link-para-o-gif.com/imagem.gif](https://github.com/NicolasHarnisch/Sistema-de-Passagens-Aereas/blob/main/Imagens/Funcionamento%20Reserva%20de%20Poltronas%20Viagens%201.0.gif)
+
+#### Versão 1.1: Atualizações que melhoraram a experiência do usuário e adicionaram novas funcionalidades.
+![https://link-para-o-gif.com/imagem.gif](https://github.com/NicolasHarnisch/Sistema-de-Passagens-Aereas/blob/main/Imagens/Funcionamento%20Reserva%20de%20Poltronas%20Viagens%201.1.gif)
 
 ## 🖥️ Tecnologias Utilizadas
 - Linguagem de Programação: C++
