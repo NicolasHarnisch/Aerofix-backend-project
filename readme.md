@@ -2,7 +2,7 @@
 
 <br>
 
-# **Plataforma de Reserva de Poltronas para Viagens Aéreas 🎟️**
+# **Plataforma de Reserva para Viagens Aéreas 🎟️**
 
 </div>
 
