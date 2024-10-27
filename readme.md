@@ -6,15 +6,17 @@
 
 </div>
 
-Este projeto é uma aplicação desenvolvida em C++ que simula um sistema de reserva de poltronas, oferecendo uma experiência imersiva e intuitiva.
+**Este projeto é uma aplicação desenvolvida em C++ que simula um sistema de reserva de poltronas, oferecendo uma experiência imersiva e intuitiva.**
 
-## Aqui está um GIF mostrando como o projeto funciona:
+---
 
-#### Versão 1.0: Lançamento inicial com funcionalidades básicas.
+### **Aqui está um GIF mostrando como o projeto funciona:**
+
+##### Versão 1.0: Lançamento inicial com funcionalidades básicas.
 
 ![https://link-para-o-gif.com/imagem.gif](https://github.com/NicolasHarnisch/Sistema-de-Passagens-Aereas/blob/main/Imagens/Funcionamento%20Reserva%20de%20Poltronas%20Viagens%201.0.gif)
 
-#### Versão 1.1: Atualizações que melhoraram a experiência do usuário e adicionaram novas funcionalidades.
+##### Versão 1.1: Atualizações que melhoraram a experiência do usuário e adicionaram novas funcionalidades.
 ![https://link-para-o-gif.com/imagem.gif](https://github.com/NicolasHarnisch/Sistema-de-Passagens-Aereas/blob/main/Imagens/Funcionamento%20Reserva%20de%20Poltronas%20Viagens%201.1.gif)
 
 ## 🖥️ Tecnologias Utilizadas
@@ -22,6 +24,7 @@ Este projeto é uma aplicação desenvolvida em C++ que simula um sistema de res
 - Compilador: MinGW (ou qualquer compilador compatível com C++)
 
 ## 📋 Requisitos do Sistema
+
 - Sistema Operacional: Windows, Linux ou MacOS
 - Compilador: MinGW (ou outro compatível com C++)
 - Memória: 1 GB de RAM (mínimo recomendado)
