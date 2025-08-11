@@ -1,9 +1,9 @@
-# Sistema de Reserva de Passagens Aéreas / Versão 1.0 🎟️
-## 📜 Funcionalidades
+# Airline Ticket Reservation System / Version 1.0 🎟️
+## 📜 Features
 
-- **Visualização das Poltronas**: Exibe a disposição dos assentos disponíveis e ocupados.
-- **Reserva de Classes**: Possibilidade de escolher entre classes econômica e executiva.
-- **Armazenamento de Reservas**: As poltronas escolhidas são salvas durante a sessão.
-- **Planos Familiares**: Suporte para reservas de famílias de 2, 3, 4 ou 5 pessoas, com a flexibilidade de escolher diferentes fileiras para cada assento.
-- **Restrições de Assentos Econômicos**: Proíbe reservas dos assentos A e F na classe econômica, reservando-os para a classe executiva.
-- **Recomendações de Assentos**: O sistema sugere automaticamente assentos próximos para garantir que todos os membros de um grupo estejam juntos.
+- **Seat Visualization**: Displays the layout of available and occupied seats.
+- **Class Selection**: Ability to choose between economy and business classes.
+- **Reservation Storage**: Chosen seats are saved during the session.
+- **Family Plans**: Support for reservations for families of 2, 3, 4, or 5 people, with the flexibility to choose different rows for each seat.
+- **Economy Seat Restrictions**: Prohibits booking of seats A and F in economy class, reserving them for business class.
+- **Seat Recommendations**: The system automatically suggests adjacent seats to ensure that all members of a group are seated together.
