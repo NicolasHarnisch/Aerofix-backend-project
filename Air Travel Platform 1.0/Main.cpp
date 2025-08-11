@@ -1,5 +1,5 @@
 #include <iostream>
-#include <limits> // Para std::numeric_limits
+#include <limits> 
 
 // Função para exibir o estado atual das poltronas
 void exibirPoltronas(const char reserva[10][6]) {
