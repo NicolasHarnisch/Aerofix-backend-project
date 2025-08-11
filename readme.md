@@ -2,46 +2,43 @@
 
 <br>
 
-# **Plataforma de Reserva para Viagens Aéreas 🎟️**
+# **Airline Ticket Reservation Platform 🎟️**
 
 </div>
 
-**Este projeto é uma aplicação desenvolvida em C++ que simula um sistema de reserva de poltronas, oferecendo uma experiência imersiva e intuitiva.**
+**This project is an application developed in C++ that simulates a seat reservation system, offering an immersive and intuitive experience.**
 
 ---
 
-### **Aqui está um GIF mostrando como o projeto funciona:**
+### **Here is a GIF showing how the project works:**
 
-##### Versão 1.0: Lançamento inicial com funcionalidades básicas.
+##### Version 1.0: Initial release with basic functionalities.
 
-![https://link-para-o-gif.com/imagem.gif](https://github.com/NicolasHarnisch/Sistema-de-Passagens-Aereas/blob/main/Imagens/Funcionamento%20Reserva%20de%20Poltronas%20Viagens%201.0.gif)
+![https://github.com/NicolasHarnisch/Sistema-de-Passagens-Aereas/blob/main/Imagens/Funcionamento%20Reserva%20de%20Poltronas%20Viagens%201.0.gif](https://github.com/NicolasHarnisch/Sistema-de-Passagens-Aereas/blob/main/Imagens/Funcionamento%20Reserva%20de%20Poltronas%20Viagens%201.0.gif)
 
-##### Versão 1.1: Atualizações que melhoraram a experiência do usuário e adicionaram novas funcionalidades.
-![https://link-para-o-gif.com/imagem.gif](https://github.com/NicolasHarnisch/Sistema-de-Passagens-Aereas/blob/main/Imagens/Funcionamento%20Reserva%20de%20Poltronas%20Viagens%201.1.gif)
+##### Version 1.1: Updates that improved the user experience and added new features.
+![https://github.com/NicolasHarnisch/Sistema-de-Passagens-Aereas/blob/main/Imagens/Funcionamento%20Reserva%20de%20Poltronas%20Viagens%201.1.gif](https://github.com/NicolasHarnisch/Sistema-de-Passagens-Aereas/blob/main/Imagens/Funcionamento%20Reserva%20de%20Poltronas%20Viagens%201.1.gif)
 
-## 🖥️ Tecnologias Utilizadas
-- Linguagem de Programação: C++
-- Compilador: MinGW (ou qualquer compilador compatível com C++)
+## 🖥️ Technologies Used
+- Programming Language: C++
+- Compiler: MinGW (or any compatible C++ compiler)
 
-## 📋 Requisitos do Sistema
+## 📋 System Requirements
 
-- Sistema Operacional: Windows, Linux ou MacOS
-- Compilador: MinGW (ou outro compatível com C++)
-- Memória: 1 GB de RAM (mínimo recomendado)
+- Operating System: Windows, Linux, or macOS
+- Compiler: MinGW (or another compatible C++ compiler)
+- Memory: 1 GB RAM (minimum recommended)
 
-## 🔧 Melhorias Futuras
-- **Suporte a Mais Classes**: Incluir outras classes de assentos, como premium ou VIP, para maior personalização.
-- **Sistema de Avaliação**: Permitir que os usuários deixem feedback sobre o sistema e as poltronas, ajudando a melhorar o serviço.
-- **Criação de Conta de Usuário**: Permitir que os usuários criem contas para gerenciar suas reservas e preferências, facilitando a experiência no sistema.
-- **Melhoria na Performance**: Otimizar o código para melhorar a velocidade e a eficiência do sistema, especialmente em grandes volumes de reservas.
+## 🔧 Future Improvements
+- **Support for More Classes**: Include other seat classes, such as premium or VIP, for greater customization.
+- **Rating System**: Allow users to leave feedback on the system and the seats, helping to improve the service.
+- **User Account Creation**: Enable users to create accounts to manage their reservations and preferences, making the system experience easier.
+- **Performance Enhancement**: Optimize the code to improve the system's speed and efficiency, especially with a large volume of reservations.
 
-## 📝 Licença
-Este projeto está licenciado sob a MIT License. Sinta-se à vontade para usar, modificar e distribuir este projeto.
-
-## 📞 Contato
-Para mais informações, dúvidas ou sugestões, entre em contato:
+## 📞 Contact
+For more information, questions, or suggestions, please get in touch:
 
 - Email: nicolasgomeshar@gmail.com
-- Celular: (85) 996883588
+- Phone: (85) 996883588
 - GitHub: NicolasHarnisch
 - Linkedin: https://www.linkedin.com/in/nicolasharnisch/
