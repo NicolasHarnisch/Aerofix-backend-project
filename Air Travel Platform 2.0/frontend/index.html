@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aerofix Airlines | Reservas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    
+    <header class="navbar">
+        <div class="nav-content">
+            <div class="logo">
+                <span class="icon">✈️</span>
+                <h1>Aerofix Airlines</h1>
+            </div>
+            <div class="nav-steps">
+                <span class="step active">Reserva de Assentos</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <aside class="painel-controle">
+            <div class="painel-header">
+                <h2>Detalhes da Viagem</h2>
+                <p>Preencha os dados do passageiro</p>
+            </div>
+            
+            <div class="form-group">
+                <label>Qual plano deseja?</label>
+                <select id="tipo-plano" onchange="mudarFormulario()" class="input-moderno">
+                    <option value="individual">Plano Individual</option>
+                    <option value="casal">Plano Casal</option>
+                    <option value="familia">Plano Família</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Escolha a Classe:</label>
+                <select id="classe-voo" class="input-moderno">
+                    <option value="1">Econômica (B, C, D, E)</option>
+                    <option value="2">Executiva VIP (A a F)</option>
+                </select>
+            </div>
+
+            <div id="opcoes-dinamicas" class="opcoes-box"></div>
+
+            <button class="btn-reservar" onclick="enviarReserva()">Confirmar Reserva</button>
+        </aside>
+
+        <section class="area-aviao">
+            <div class="legenda">
+                <div class="item-legenda"><div class="caixa livre"></div> Livre</div>
+                <div class="item-legenda"><div class="caixa ocupado"></div> Ocupado</div>
+                <div class="item-legenda"><div class="caixa selecionado"></div> Selecionado</div>
+            </div>
+            
+            <div class="cabine-aviao">
+                <div class="bico-aviao">
+                    <div class="cabine-piloto"></div>
+                </div>
+                
+                <div id="aviao-grid" class="aviao">
+                    </div>
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>

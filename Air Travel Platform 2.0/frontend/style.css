@@ -1,0 +1,192 @@
+/* Variáveis de Cores Corporativas (Estilo Airline) */
+:root {
+    --primary-blue: #0b2b53; /* Azul Marinho Profundo */
+    --accent-blue: #0066cc;  /* Azul Brilhante */
+    --bg-color: #f0f4f8;     /* Fundo Acinzentado Limpo */
+    --text-main: #2d3748;
+    --text-muted: #718096;
+    --seat-free: #10b981;    /* Verde Moderno */
+    --seat-free-hover: #059669;
+    --seat-taken: #ef4444;   /* Vermelho Moderno */
+    --seat-aisle: #e2e8f0;
+    --border-radius: 12px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+
+body { background-color: var(--bg-color); color: var(--text-main); }
+
+/* ==== NAVBAR ==== */
+.navbar {
+    background: var(--primary-blue);
+    color: white;
+    padding: 15px 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.nav-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo { display: flex; align-items: center; gap: 10px; }
+.logo h1 { font-size: 1.5rem; font-weight: 600; letter-spacing: 0.5px; }
+.logo .icon { font-size: 1.8rem; }
+
+.nav-steps { display: flex; gap: 20px; font-size: 0.9rem; font-weight: 500; color: #a0aec0; }
+.step.active { color: white; border-bottom: 2px solid var(--accent-blue); padding-bottom: 5px; }
+
+/* ==== LAYOUT PRINCIPAL ==== */
+.container {
+    display: flex;
+    gap: 50px;
+    max-width: 1100px;
+    margin: 40px auto;
+    align-items: flex-start;
+    padding: 0 20px;
+}
+
+/* ==== PAINEL DE CONTROLE ==== */
+.painel-controle {
+    background: white;
+    padding: 35px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    flex: 1;
+    min-width: 380px;
+    border: 1px solid #e2e8f0;
+}
+
+.painel-header { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 2px solid #edf2f7; }
+.painel-header h2 { font-size: 1.4rem; color: var(--primary-blue); }
+.painel-header p { font-size: 0.9rem; color: var(--text-muted); }
+
+.form-group { margin-bottom: 20px; }
+.painel-controle label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.95rem; color: #4a5568;}
+
+/* Inputs Profissionais */
+.input-moderno, .painel-controle select, .painel-controle input[type="text"] {
+    width: 100%; 
+    padding: 12px 15px; 
+    border: 2px solid #e2e8f0; 
+    border-radius: 8px;
+    font-size: 1rem;
+    color: var(--text-main);
+    background-color: #f8fafc;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.input-moderno:focus, .painel-controle select:focus, .painel-controle input[type="text"]:focus {
+    border-color: var(--accent-blue);
+    background-color: white;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.15);
+}
+
+.opcoes-box { margin-top: 15px; }
+
+/* Botão de Ação Principal */
+.btn-reservar {
+    width: 100%; 
+    padding: 15px; 
+    margin-top: 10px;
+    background: var(--accent-blue); 
+    color: white; 
+    border: none; 
+    border-radius: 8px;
+    font-size: 1.1rem; 
+    font-weight: 600; 
+    cursor: pointer; 
+    transition: 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3);
+}
+
+.btn-reservar:hover { background: #0052a3; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4); }
+.btn-reservar:active { transform: translateY(0); }
+
+/* ==== ÁREA DO AVIÃO ==== */
+.area-aviao { flex: 1.2; display: flex; flex-direction: column; align-items: center; }
+
+/* Legenda */
+.legenda {
+    display: flex; gap: 20px; margin-bottom: 30px;
+    background: white; padding: 15px 25px; border-radius: 50px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+.item-legenda { display: flex; align-items: center; gap: 8px; font-weight: 500; font-size: 0.9rem; }
+.caixa { width: 18px; height: 18px; border-radius: 4px; }
+.caixa.livre { background: var(--seat-free); }
+.caixa.ocupado { background: var(--seat-taken); }
+.caixa.selecionado { background: var(--accent-blue); }
+
+/* Desenho Físico do Avião */
+.cabine-aviao {
+    background: white;
+    padding: 0 0 40px 0;
+    border-radius: 120px 120px 40px 40px; /* Bico arredondado */
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+    border: 8px solid #cbd5e1; /* Borda da fuselagem */
+    width: max-content;
+    position: relative;
+}
+
+/* O vidro do piloto */
+.bico-aviao {
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 20px;
+    border-bottom: 2px dashed #e2e8f0;
+    margin-bottom: 20px;
+}
+.cabine-piloto {
+    width: 60px; height: 30px;
+    background: #94a3b8;
+    border-radius: 40px 40px 10px 10px;
+    opacity: 0.5;
+}
+
+/* Grade de Assentos */
+.aviao { display: flex; flex-direction: column; gap: 15px; padding: 0 40px; }
+.fileira { display: flex; align-items: center; justify-content: center; gap: 12px; }
+
+.num-fileira { 
+    width: 30px; text-align: center; 
+    font-weight: 700; color: #a0aec0; font-size: 1.1rem; 
+}
+
+/* O Design da Poltrona */
+.poltrona {
+    width: 45px; height: 48px; 
+    border: none; 
+    border-radius: 10px 10px 6px 6px; /* Lembra o encosto de uma cadeira */
+    font-weight: 600; font-size: 0.9rem;
+    color: white; 
+    transition: all 0.2s ease;
+    box-shadow: inset 0 -4px 0 rgba(0,0,0,0.15), 0 4px 6px rgba(0,0,0,0.05); /* Efeito 3D */
+    position: relative;
+}
+
+.poltrona::after {
+    content: ''; position: absolute;
+    top: 5px; left: 5px; right: 5px; height: 5px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 10px;
+}
+
+.livre { background: var(--seat-free); cursor: pointer; }
+.livre:hover { background: var(--seat-free-hover); transform: translateY(-3px); box-shadow: inset 0 -4px 0 rgba(0,0,0,0.2), 0 8px 12px rgba(16, 185, 129, 0.3); }
+.livre:active { transform: translateY(1px); box-shadow: inset 0 -2px 0 rgba(0,0,0,0.2); }
+
+.ocupado { background: var(--seat-taken); cursor: not-allowed; opacity: 0.85; box-shadow: inset 0 -4px 0 rgba(0,0,0,0.3); }
+
+/* Corredor central com textura de tapete (opcional) */
+.corredor { width: 35px; background: rgba(0,0,0,0.02); border-radius: 20px; }

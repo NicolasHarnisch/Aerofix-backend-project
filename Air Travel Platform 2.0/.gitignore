@@ -1,0 +1,8 @@
+# Ignorar arquivos compilados do C++
+*.exe
+*.o
+*.out
+
+# Ignorar pastas do sistema e do VS Code
+.vscode/
+.DS_Store
