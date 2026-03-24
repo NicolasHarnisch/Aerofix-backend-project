@@ -2,17 +2,20 @@ let mapaAtual = [];
 let modoManualAtivo = false;
 let cliquesRestantes = 0;
 let nomesParaManual = []; // Guarda a fila de nomes que estão escolhendo
+
+// URL da API corrigida. NUNCA coloque "/" no final.
 const API_URL = "https://aerofix-backend-project.onrender.com";
 
 async function carregarAssentos() {
     try {
-        const resposta = await fetch('${API_URL}/assentos');
+        // CORREÇÃO: Usando o sinal de + para juntar a variável com o texto
+        const resposta = await fetch(API_URL + '/assentos');
         if (!resposta.ok) throw new Error("Servidor não respondeu OK");
         const mapa = await resposta.json();
         mapaAtual = mapa; 
         desenharAviao(mapa);
     } catch (erro) {
-        document.getElementById('aviao-grid').innerHTML = "<p style='color:red;'>Servidor offline. C++ está rodando?</p>";
+        document.getElementById('aviao-grid').innerHTML = "<p style='color:red;'>Servidor offline. Verifique se o backend está rodando!</p>";
     }
 }
 
@@ -151,7 +154,7 @@ function validarCapacidade(classe, qtdNecessaria) {
     let livres = 0;
     for (let f = 0; f < 10; f++) {
         for (let c = 0; c < 6; c++) {
-            if (mapaAtual[f][c].status === 'O') {
+            if (mapaAtual[f][c] && mapaAtual[f][c].status === 'O') {
                 if (classe === 2) livres++; // Executiva tem todas as colunas
                 else if (classe === 1 && c >= 1 && c <= 4) livres++; // Econômica só do meio
             }
@@ -179,7 +182,7 @@ async function enviarReserva() {
     if (plano === 'casal' && qtdAssentosNecessarios !== 2) { alert("Plano Casal exige 2 nomes separados por vírgula!"); return; }
     if (plano === 'familia' && (qtdAssentosNecessarios < 3 || qtdAssentosNecessarios > 5)) { alert("Família exige de 3 a 5 nomes!"); return; }
 
-    // VERIFICA SE O AVIÃO TEM LUGAR! (Solução do seu Bug)
+    // VERIFICA SE O AVIÃO TEM LUGAR!
     if (!validarCapacidade(classe, qtdAssentosNecessarios)) {
         alert(`Não há ${qtdAssentosNecessarios} poltronas disponíveis nesta classe!`);
         return;
@@ -187,7 +190,8 @@ async function enviarReserva() {
 
     if (plano === 'individual') {
         if (metodo === 'manual') { iniciarSelecaoManual(nomes); return; }
-        url = '${API_URL}/reservar/individual';
+        // CORREÇÃO: Usando o sinal de +
+        url = API_URL + '/reservar/individual';
         payload.recomendacao = true;
         payload.nome = nomes[0]; // Rota individual espera "nome" no singular
         const selectJanela = document.getElementById('pref-janela');
@@ -195,12 +199,14 @@ async function enviarReserva() {
     } 
     else if (plano === 'familia') {
         if (metodo === 'manual') { iniciarSelecaoManual(nomes); return; }
-        url = '${API_URL}/reservar/familia';
+        // CORREÇÃO: Usando o sinal de +
+        url = API_URL + '/reservar/familia';
         payload.numPessoas = qtdAssentosNecessarios;
     } 
     else if (plano === 'casal') {
         if (metodo === 'manual') { iniciarSelecaoManual(nomes); return; }
-        url = '${API_URL}/reservar/casal';
+        // CORREÇÃO: Usando o sinal de +
+        url = API_URL + '/reservar/casal';
         payload.escolhaProximidade = parseInt(document.getElementById('pref-casal').value);
     }
 
@@ -222,7 +228,7 @@ async function enviarReserva() {
             alert(`O sistema não achou lugares juntos: ${resultado.erro}\nPor favor, escolha separadamente no mapa.`);
             iniciarSelecaoManual(nomes);
         }
-    } catch (e) { alert("Servidor C++ offline!"); }
+    } catch (e) { alert("Servidor C++ offline ou erro de rede!"); }
 }
 
 function iniciarSelecaoManual(listaNomes) {
@@ -235,7 +241,11 @@ function iniciarSelecaoManual(listaNomes) {
 }
 
 async function clicarPoltrona(fileira, coluna) {
-    const poltronaAtual = mapaAtual[fileira-1][coluna.charCodeAt(0) - 65];
+    const fIdx = fileira-1;
+    const cIdx = coluna.charCodeAt(0) - 65;
+    
+    if(!mapaAtual[fIdx] || !mapaAtual[fIdx][cIdx]) return;
+    const poltronaAtual = mapaAtual[fIdx][cIdx];
     
     // IMPEDE CLIQUE PRECOCE! (Solução do seu bug)
     if (!modoManualAtivo) {
@@ -256,28 +266,32 @@ async function clicarPoltrona(fileira, coluna) {
     let nomePassageiro = nomesParaManual[0];
     if(!confirm(`Reservar a poltrona ${coluna}${fileira} para ${nomePassageiro}?`)) return;
 
-    // Envia 1 a 1 para o C++
-    const resposta = await fetch('${API_URL}/reservar/individual', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ classe: classe, fileira: fileira, coluna: coluna, simular: false, recomendacao: false, nome: nomePassageiro })
-    });
+    // CORREÇÃO: Usando o sinal de + para juntar a URL
+    try {
+        const resposta = await fetch(API_URL + '/reservar/individual', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ classe: classe, fileira: fileira, coluna: coluna, simular: false, recomendacao: false, nome: nomePassageiro })
+        });
 
-    if (resposta.ok) {
-        carregarAssentos(); 
-        nomesParaManual.shift(); // Remove o primeiro da fila
-        cliquesRestantes--;
-        
-        if (cliquesRestantes <= 0) {
-            modoManualAtivo = false;
-            travarPainel(false); // Libera o sistema
-            setTimeout(() => alert("Seleção manual finalizada com sucesso! Todas as poltronas foram reservadas."), 300);
+        if (resposta.ok) {
+            carregarAssentos(); 
+            nomesParaManual.shift(); // Remove o primeiro da fila
+            cliquesRestantes--;
+            
+            if (cliquesRestantes <= 0) {
+                modoManualAtivo = false;
+                travarPainel(false); // Libera o sistema
+                setTimeout(() => alert("Seleção manual finalizada com sucesso! Todas as poltronas foram reservadas."), 300);
+            } else {
+                setTimeout(() => alert(`Poltrona reservada!\nAgora clique no assento para o próximo passageiro(a): ${nomesParaManual[0]}`), 100);
+            }
         } else {
-            setTimeout(() => alert(`Poltrona reservada!\nAgora clique no assento para o próximo passageiro(a): ${nomesParaManual[0]}`), 100);
+            const res = await resposta.json();
+            alert("Erro: " + res.erro);
         }
-    } else {
-        const res = await resposta.json();
-        alert("Erro: " + res.erro);
+    } catch (e) {
+        alert("Falha na comunicação ao clicar na poltrona.");
     }
 }
 
