@@ -218,6 +218,12 @@ int main() {
         res.set_content(resposta.dump(), "application/json");
     });
 
-    svr.listen("localhost", 8080);
+// Configuração de porta dinâmica para servidores na nuvem (Render, AWS, etc)
+    const char* port_str = getenv("PORT");
+    int port = port_str ? stoi(port_str) : 8080;
+    
+    cout << "Servidor Aerofix rodando na porta " << port << "..." << endl;
+    svr.listen("0.0.0.0", port);
+    
     return 0;
 }
