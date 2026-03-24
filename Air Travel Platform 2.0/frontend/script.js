@@ -2,10 +2,11 @@ let mapaAtual = [];
 let modoManualAtivo = false;
 let cliquesRestantes = 0;
 let nomesParaManual = []; // Guarda a fila de nomes que estão escolhendo
+const API_URL = "https://aerofix-backend-project.onrender.com";
 
 async function carregarAssentos() {
     try {
-        const resposta = await fetch('http://localhost:8080/assentos');
+        const resposta = await fetch('${API_URL}/assentos');
         if (!resposta.ok) throw new Error("Servidor não respondeu OK");
         const mapa = await resposta.json();
         mapaAtual = mapa; 
@@ -186,7 +187,7 @@ async function enviarReserva() {
 
     if (plano === 'individual') {
         if (metodo === 'manual') { iniciarSelecaoManual(nomes); return; }
-        url = 'http://localhost:8080/reservar/individual';
+        url = '${API_URL}/reservar/individual';
         payload.recomendacao = true;
         payload.nome = nomes[0]; // Rota individual espera "nome" no singular
         const selectJanela = document.getElementById('pref-janela');
@@ -194,12 +195,12 @@ async function enviarReserva() {
     } 
     else if (plano === 'familia') {
         if (metodo === 'manual') { iniciarSelecaoManual(nomes); return; }
-        url = 'http://localhost:8080/reservar/familia';
+        url = '${API_URL}/reservar/familia';
         payload.numPessoas = qtdAssentosNecessarios;
     } 
     else if (plano === 'casal') {
         if (metodo === 'manual') { iniciarSelecaoManual(nomes); return; }
-        url = 'http://localhost:8080/reservar/casal';
+        url = '${API_URL}/reservar/casal';
         payload.escolhaProximidade = parseInt(document.getElementById('pref-casal').value);
     }
 
@@ -256,7 +257,7 @@ async function clicarPoltrona(fileira, coluna) {
     if(!confirm(`Reservar a poltrona ${coluna}${fileira} para ${nomePassageiro}?`)) return;
 
     // Envia 1 a 1 para o C++
-    const resposta = await fetch('http://localhost:8080/reservar/individual', {
+    const resposta = await fetch('${API_URL}/reservar/individual', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ classe: classe, fileira: fileira, coluna: coluna, simular: false, recomendacao: false, nome: nomePassageiro })
