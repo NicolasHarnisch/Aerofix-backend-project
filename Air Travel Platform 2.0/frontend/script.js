@@ -6,9 +6,21 @@ let nomesParaManual = []; // Guarda a fila de nomes que estão escolhendo
 // URL da API corrigida. NUNCA coloque "/" no final.
 const API_URL = "https://aerofix-backend-project.onrender.com";
 
+// --- FUNÇÕES DE LOADING ---
+function mostrarLoading() {
+    const loader = document.getElementById('loading-overlay');
+    if (loader) loader.style.display = 'flex';
+}
+
+function esconderLoading() {
+    const loader = document.getElementById('loading-overlay');
+    if (loader) loader.style.display = 'none';
+}
+// --------------------------
+
 async function carregarAssentos() {
+    mostrarLoading(); // Mostra o loading antes de chamar a API
     try {
-        // CORREÇÃO: Usando o sinal de + para juntar a variável com o texto
         const resposta = await fetch(API_URL + '/assentos');
         if (!resposta.ok) throw new Error("Servidor não respondeu OK");
         const mapa = await resposta.json();
@@ -16,6 +28,8 @@ async function carregarAssentos() {
         desenharAviao(mapa);
     } catch (erro) {
         document.getElementById('aviao-grid').innerHTML = "<p style='color:red;'>Servidor offline. Verifique se o backend está rodando!</p>";
+    } finally {
+        esconderLoading(); // Esconde o loading assim que a resposta chegar (ou der erro)
     }
 }
 
@@ -188,24 +202,23 @@ async function enviarReserva() {
         return;
     }
 
+    mostrarLoading(); // Mostra o loading enquanto pensa na reserva
+
     if (plano === 'individual') {
-        if (metodo === 'manual') { iniciarSelecaoManual(nomes); return; }
-        // CORREÇÃO: Usando o sinal de +
+        if (metodo === 'manual') { iniciarSelecaoManual(nomes); esconderLoading(); return; }
         url = API_URL + '/reservar/individual';
         payload.recomendacao = true;
-        payload.nome = nomes[0]; // Rota individual espera "nome" no singular
+        payload.nome = nomes[0]; 
         const selectJanela = document.getElementById('pref-janela');
         payload.pertoJanela = selectJanela ? (selectJanela.value === 'sim') : false;
     } 
     else if (plano === 'familia') {
-        if (metodo === 'manual') { iniciarSelecaoManual(nomes); return; }
-        // CORREÇÃO: Usando o sinal de +
+        if (metodo === 'manual') { iniciarSelecaoManual(nomes); esconderLoading(); return; }
         url = API_URL + '/reservar/familia';
         payload.numPessoas = qtdAssentosNecessarios;
     } 
     else if (plano === 'casal') {
-        if (metodo === 'manual') { iniciarSelecaoManual(nomes); return; }
-        // CORREÇÃO: Usando o sinal de +
+        if (metodo === 'manual') { iniciarSelecaoManual(nomes); esconderLoading(); return; }
         url = API_URL + '/reservar/casal';
         payload.escolhaProximidade = parseInt(document.getElementById('pref-casal').value);
     }
@@ -214,13 +227,16 @@ async function enviarReserva() {
         const resposta = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
         const resultado = await resposta.json();
 
+        esconderLoading(); // Esconde o loading antes do confirm/alert
+
         if (resposta.ok) {
             const assentosSugeridos = resultado.assentos.join(", ");
             if (confirm(`O sistema sugere: ${assentosSugeridos}.\nConfirmar reserva para ${nomesRaw}?`)) {
+                mostrarLoading(); // Mostra loading novamente pra confirmar de fato
                 payload.simular = false;
                 await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
                 alert("Reserva concluída com sucesso!");
-                carregarAssentos();
+                await carregarAssentos(); // O carregarAssentos já lida com o seu próprio loading
             } else {
                 iniciarSelecaoManual(nomes);
             }
@@ -228,15 +244,17 @@ async function enviarReserva() {
             alert(`O sistema não achou lugares juntos: ${resultado.erro}\nPor favor, escolha separadamente no mapa.`);
             iniciarSelecaoManual(nomes);
         }
-    } catch (e) { alert("Servidor C++ offline ou erro de rede!"); }
+    } catch (e) { 
+        esconderLoading();
+        alert("Servidor C++ offline ou erro de rede!"); 
+    }
 }
 
 function iniciarSelecaoManual(listaNomes) {
     modoManualAtivo = true;
     nomesParaManual = [...listaNomes];
     cliquesRestantes = nomesParaManual.length;
-    travarPainel(true); // Bloqueia o formulário para o usuário não burlar!
-    
+    travarPainel(true); 
     alert(`MÓDULO MANUAL ATIVADO!\n\nClique no mapa para escolher a poltrona do(a) passageiro(a): ${nomesParaManual[0]}`);
 }
 
@@ -247,9 +265,8 @@ async function clicarPoltrona(fileira, coluna) {
     if(!mapaAtual[fIdx] || !mapaAtual[fIdx][cIdx]) return;
     const poltronaAtual = mapaAtual[fIdx][cIdx];
     
-    // IMPEDE CLIQUE PRECOCE! (Solução do seu bug)
     if (!modoManualAtivo) {
-        if(poltronaAtual.status === 'X') return; // Clicou num vermelho atoa
+        if(poltronaAtual.status === 'X') return; 
         alert("⚠️ Selecione um plano à esquerda e clique em 'Confirmar Reserva' primeiro para iniciar a reserva.");
         return;
     }
@@ -266,7 +283,8 @@ async function clicarPoltrona(fileira, coluna) {
     let nomePassageiro = nomesParaManual[0];
     if(!confirm(`Reservar a poltrona ${coluna}${fileira} para ${nomePassageiro}?`)) return;
 
-    // CORREÇÃO: Usando o sinal de + para juntar a URL
+    mostrarLoading(); // Loading enquanto faz a reserva no clique manual
+
     try {
         const resposta = await fetch(API_URL + '/reservar/individual', {
             method: 'POST',
@@ -275,13 +293,13 @@ async function clicarPoltrona(fileira, coluna) {
         });
 
         if (resposta.ok) {
-            carregarAssentos(); 
-            nomesParaManual.shift(); // Remove o primeiro da fila
+            await carregarAssentos(); // já tem loading dentro dele
+            nomesParaManual.shift(); 
             cliquesRestantes--;
             
             if (cliquesRestantes <= 0) {
                 modoManualAtivo = false;
-                travarPainel(false); // Libera o sistema
+                travarPainel(false); 
                 setTimeout(() => alert("Seleção manual finalizada com sucesso! Todas as poltronas foram reservadas."), 300);
             } else {
                 setTimeout(() => alert(`Poltrona reservada!\nAgora clique no assento para o próximo passageiro(a): ${nomesParaManual[0]}`), 100);
@@ -292,9 +310,10 @@ async function clicarPoltrona(fileira, coluna) {
         }
     } catch (e) {
         alert("Falha na comunicação ao clicar na poltrona.");
+    } finally {
+        esconderLoading();
     }
 }
 
-// Configura o evento do botão de Confirmar
 document.querySelector('.btn-reservar').onclick = enviarReserva;
 window.onload = () => { mudarFormulario(); carregarAssentos(); };
